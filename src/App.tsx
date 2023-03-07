@@ -1,42 +1,29 @@
 import { useEffect, useState } from 'react';
 import reactLogo from './assets/react.svg';
-import './App.css';
+import { ExampleCanvas } from './ExampleCanvas';
 
 function App() {
-  const [count, setCount] = useState(0);
-  const [x, setX] = useState(1.0);
+  const [rotation, setRotation] = useState(1.0);
 
   useEffect(() => {
-    setInterval(() => setX((x) => Math.PI * Math.sin(x + 0.01)), 1000);
+    setInterval(() => setRotation((x) => x + 0.001), 20);
   }, []);
 
   return (
     <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+      <h2>Rendering issue</h2>
+      <div
+        style={{
+          margin: '3em auto',
+          padding: 0,
+          boxSizing: 'border-box',
+          backgroundColor: '#555555',
+          width: '70vw',
+          height: '70vh',
+        }}
+      >
+        <ExampleCanvas rotation={Math.PI * Math.sin(rotation)} />
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-      </div>
-      <div>
-        <button style={{ width: '20em' }} onClick={() => setX(1.0)}>
-          X is {x}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
     </div>
   );
 }
